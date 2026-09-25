@@ -1,0 +1,748 @@
+/**
+ * Sistema de Gestión de Atención Ciudadana • Ilustre Municipalidad de La Serena
+ * Normas Gráficas Oficiales (laserena.cl/conocenos/normas-graficas)
+ * Filosofía UI/UX Pro Max & Stitch Design System
+ * 
+ * - Paleta Oficial: Rojo Heráldico (#B80003, #920000, #DB3334, #8B1D19), Oro Heráldico (#E5A823), Blanco y Pizarra Cálida
+ * - Enfoque: Amigable, Humano, Intuitivo, Accesible (WCAG AAA), Táctil y Moderno
+ */
+
+:root {
+  /* ==============================================================================
+     PALETA CORPORATIVA ILUSTRE MUNICIPALIDAD DE LA SERENA
+     ============================================================================== */
+  --muni-red: #B80003;           /* Rojo Heráldico Oficial */
+  --muni-red-dark: #8B1D19;      /* Rojo Oscuro Institucional */
+  --muni-red-light: #DB3334;     /* Rojo Luminoso */
+  --muni-red-tint: rgba(184, 0, 3, 0.07);
+  --muni-red-tint-strong: rgba(184, 0, 3, 0.14);
+  --muni-red-border: rgba(184, 0, 3, 0.22);
+
+  --muni-gold: #D97706;          /* Oro / Amarillo Heráldico */
+  --muni-gold-light: #F59E0B;
+  --muni-gold-tint: rgba(217, 119, 6, 0.12);
+
+  --muni-navy: #0F172A;          /* Pizarra Azulada Profunda */
+  --muni-navy-light: #1E293B;
+
+  --muni-green: #059669;         /* Verde Excel / Estado Activo */
+  --muni-green-tint: rgba(5, 150, 105, 0.1);
+  --muni-green-border: rgba(5, 150, 105, 0.25);
+
+  --muni-blue: #0284C7;          /* Azul Cívico / Trámites */
+  --muni-blue-tint: rgba(2, 132, 199, 0.1);
+
+  --muni-purple: #7C3AED;        /* Púrpura Social / Consulta */
+  --muni-purple-tint: rgba(124, 58, 237, 0.1);
+
+  /* Superficies y Lienzo Stitch */
+  --bg-app: #F8FAFC;
+  --surface-card: #FFFFFF;
+  --surface-muted: #F1F5F9;
+  --surface-hover: #F8FAFC;
+
+  /* Texto y Jerarquía */
+  --text-main: #0F172A;
+  --text-muted: #64748B;
+  --text-light: #94A3B8;
+
+  /* Bordes Stitch */
+  --border-stitch: #E2E8F0;
+  --border-stitch-focus: #B80003;
+
+  /* Sombras Amigables Stitch */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 0 0 1px var(--border-stitch);
+  --shadow-hover: 0 12px 28px -4px rgba(184, 0, 3, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(184, 0, 3, 0.15);
+  --shadow-modal: 0 25px 50px -12px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08);
+
+  /* Radios Suaves y Amigables */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Tipografía */
+  --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --transition-stitch: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==============================================================================
+   RESETS Y ESTILOS BASE
+   ============================================================================== */
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  letter-spacing: -0.011em;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Franja Superior Institucional de La Serena (Bicolor Band) */
+.muni-top-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--muni-red) 0%, var(--muni-red-light) 50%, var(--muni-gold-light) 100%);
+  width: 100%;
+}
+
+/* ==============================================================================
+   NAVBAR SUPERIOR STITCH
+   ============================================================================== */
+.navbar-stitch {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-stitch);
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+  padding: 0.65rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+}
+
+.brand-stitch {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+}
+
+.brand-stitch .brand-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-stitch .brand-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--muni-red);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.brand-stitch .brand-subtitle {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.user-badge-stitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--border-stitch);
+  padding: 5px 12px 5px 6px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: var(--transition-stitch);
+}
+
+.user-badge-stitch:hover {
+  background: #FFFFFF;
+  border-color: var(--muni-red-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.user-badge-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--muni-red) 0%, var(--muni-red-dark) 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ==============================================================================
+   SIDEBAR STITCH
+   ============================================================================== */
+.layout-stitch {
+  display: flex;
+  min-height: calc(100vh - 65px);
+}
+
+.sidebar-stitch {
+  width: 260px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid var(--border-stitch);
+  padding: 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  padding: 0.75rem 0.75rem 0.35rem 0.75rem;
+}
+
+.nav-link-stitch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-main);
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition-stitch);
+  margin-bottom: 2px;
+  border-left: 3px solid transparent;
+}
+
+.nav-link-stitch i {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: var(--transition-stitch);
+}
+
+.nav-link-stitch:hover {
+  background: var(--surface-muted);
+  color: var(--muni-red);
+}
+
+.nav-link-stitch:hover i {
+  color: var(--muni-red);
+}
+
+.nav-link-stitch.active {
+  background: var(--muni-red-tint);
+  color: var(--muni-red);
+  font-weight: 600;
+  border-left-color: var(--muni-red);
+}
+
+.nav-link-stitch.active i {
+  color: var(--muni-red);
+}
+
+.nav-sublink-stitch {
+  padding-left: 2.2rem;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.nav-sublink-stitch:hover {
+  color: var(--muni-red);
+  background: var(--muni-red-tint);
+}
+
+.nav-sublink-stitch.active {
+  color: var(--muni-red);
+  background: var(--muni-red-tint);
+  font-weight: 600;
+  border-left-color: var(--muni-red);
+}
+
+/* ==============================================================================
+   CONTENIDO PRINCIPAL & CARDS STITCH
+   ============================================================================== */
+.main-stitch {
+  flex: 1;
+  padding: 2rem 2.25rem;
+  overflow-y: auto;
+}
+
+.card-stitch {
+  background: var(--surface-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-stitch);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-stitch);
+  overflow: hidden;
+}
+
+.card-stitch-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--muni-red-border);
+}
+
+.card-stitch-header {
+  padding: 1.15rem 1.4rem;
+  border-bottom: 1px solid var(--border-stitch);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Hero Banner Municipal Cálido y Amigable */
+.hero-muni-banner {
+  background: linear-gradient(135deg, #8B1D19 0%, #B80003 60%, #DB3334 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2.5rem;
+  box-shadow: 0 12px 32px -4px rgba(184, 0, 3, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-muni-banner::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ==============================================================================
+   BOTONES STITCH UI/UX PRO MAX
+   ============================================================================== */
+.btn-stitch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-stitch);
+  line-height: 1.25;
+}
+
+.btn-stitch:active {
+  transform: scale(0.98);
+}
+
+/* Botón Principal Rojo La Serena */
+.btn-stitch-primary {
+  background: var(--muni-red);
+  color: #ffffff;
+  border-color: var(--muni-red-dark);
+  box-shadow: 0 2px 4px rgba(184, 0, 3, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.btn-stitch-primary:hover {
+  background: var(--muni-red-dark);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(184, 0, 3, 0.35);
+}
+
+/* Botón Secundario Stitch */
+.btn-stitch-secondary {
+  background: #ffffff;
+  color: var(--text-main);
+  border-color: var(--border-stitch);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-stitch-secondary:hover {
+  background: var(--surface-muted);
+  border-color: #CBD5E1;
+  color: var(--text-main);
+}
+
+/* Botón Excel Stitch (Oficial) */
+.btn-stitch-excel {
+  background: linear-gradient(180deg, #10B981 0%, #059669 100%);
+  color: #ffffff;
+  border-color: #047857;
+  box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-stitch-excel:hover {
+  background: linear-gradient(180deg, #34D399 0%, #10B981 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.35);
+}
+
+/* Botones Iconos de Acción */
+.btn-stitch-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-stitch);
+  background: #ffffff;
+  color: var(--text-muted);
+  transition: var(--transition-stitch);
+  text-decoration: none;
+}
+
+.btn-stitch-icon:hover {
+  background: var(--surface-muted);
+  color: var(--text-main);
+  border-color: #CBD5E1;
+}
+
+.btn-stitch-icon-delete:hover {
+  background: var(--muni-red-tint);
+  color: var(--muni-red);
+  border-color: var(--muni-red-border);
+}
+
+/* ==============================================================================
+   TABLAS STITCH & BADGES
+   ============================================================================== */
+.table-stitch {
+  width: 100%;
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-stitch thead th {
+  background: #F8FAFC;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.95rem 1.25rem;
+  border-bottom: 1px solid var(--border-stitch);
+  white-space: nowrap;
+}
+
+.table-stitch tbody td {
+  padding: 1rem 1.25rem;
+  vertical-align: middle;
+  color: var(--text-main);
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border-stitch);
+  transition: background 0.15s ease;
+}
+
+.table-stitch tbody tr:hover td {
+  background-color: rgba(184, 0, 3, 0.018);
+}
+
+.table-stitch tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Badges Stitch de Estado */
+.badge-stitch-activo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--muni-green-tint);
+  color: var(--muni-green);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--muni-green-border);
+}
+
+.badge-stitch-activo::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--muni-green);
+}
+
+.badge-stitch-inactivo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--muni-red-tint);
+  color: var(--muni-red);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--muni-red-border);
+}
+
+.badge-stitch-inactivo::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--muni-red);
+}
+
+.badge-stitch-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-stitch);
+}
+
+/* ==============================================================================
+   CAMPOS DE ENTRADA Y BÚSQUEDA STITCH
+   ============================================================================== */
+.input-stitch {
+  width: 100%;
+  font-family: var(--font-family);
+  font-size: 0.92rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-stitch);
+  background: #ffffff;
+  color: var(--text-main);
+  transition: var(--transition-stitch);
+  box-sizing: border-box;
+}
+
+.input-stitch:focus {
+  outline: none;
+  border-color: var(--muni-red);
+  box-shadow: 0 0 0 3px var(--muni-red-tint-strong);
+}
+
+.search-box-stitch {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--border-stitch);
+  border-radius: var(--radius-sm);
+  padding: 3px 12px;
+  width: 100%;
+  max-width: 420px;
+  transition: var(--transition-stitch);
+}
+
+.search-box-stitch:focus-within {
+  border-color: var(--muni-red);
+  box-shadow: 0 0 0 3px var(--muni-red-tint-strong);
+}
+
+.search-box-stitch i {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.search-box-stitch input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  color: var(--text-main);
+}
+
+/* ==============================================================================
+   PAGINACIÓN STITCH
+   ============================================================================== */
+.pagination-stitch {
+  display: inline-flex;
+  align-items: center;
+  background: var(--surface-muted);
+  padding: 3px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-stitch);
+  gap: 3px;
+}
+
+.page-link-stitch {
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  color: var(--text-main);
+  text-decoration: none;
+  transition: var(--transition-stitch);
+  border: 1px solid transparent;
+}
+
+.page-link-stitch:hover {
+  background: #ffffff;
+  color: var(--muni-red);
+  box-shadow: var(--shadow-sm);
+}
+
+.page-link-stitch.active {
+  background: var(--muni-red);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(184, 0, 3, 0.3);
+}
+
+.page-link-stitch.disabled {
+  color: var(--text-light);
+  pointer-events: none;
+}
+
+/* ==============================================================================
+   MODALES STITCH
+   ============================================================================== */
+.modal-content-stitch {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-stitch);
+  box-shadow: var(--shadow-modal);
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.modal-header-stitch {
+  padding: 1.25rem 1.6rem;
+  border-bottom: 1px solid var(--border-stitch);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-footer-stitch {
+  padding: 1rem 1.6rem;
+  border-top: 1px solid var(--border-stitch);
+  background: var(--surface-muted);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+/* ==============================================================================
+   SWEETALERT2 STITCH CUSTOM POPUP
+   ============================================================================== */
+div.swal2-popup.muni-swal-popup {
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-modal) !important;
+  border: 1px solid var(--border-stitch) !important;
+  font-family: var(--font-family) !important;
+  padding: 1.75rem !important;
+}
+
+div.swal2-popup.muni-swal-popup .swal2-title {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--text-main) !important;
+}
+
+div.swal2-popup.muni-swal-popup .swal2-html-container {
+  font-size: 0.92rem !important;
+  color: var(--text-muted) !important;
+}
+
+div.swal2-popup.muni-swal-popup .swal2-confirm {
+  background: var(--muni-red) !important;
+  border-radius: var(--radius-sm) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  padding: 0.6rem 1.4rem !important;
+  box-shadow: 0 2px 6px rgba(184, 0, 3, 0.25) !important;
+}
+
+div.swal2-popup.muni-swal-popup .swal2-cancel {
+  border-radius: var(--radius-sm) !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  padding: 0.6rem 1.4rem !important;
+  background-color: var(--surface-muted) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-stitch) !important;
+}
+
+/* ==============================================================================
+   DRIVER.JS • ESTILO INSTITUCIONAL ILUSTRE MUNICIPALIDAD DE LA SERENA
+   ============================================================================== */
+.driver-popover.driverjs-theme {
+  background-color: #ffffff !important;
+  color: var(--text-main) !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 18px !important;
+  padding: 1.4rem !important;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+  max-width: 380px !important;
+  font-family: var(--font-family) !important;
+}
+
+.driver-popover-title {
+  font-size: 1.05rem !important;
+  font-weight: 800 !important;
+  color: #0F172A !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.3 !important;
+}
+
+.driver-popover-description {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+  color: #475569 !important;
+  margin-bottom: 1.1rem !important;
+}
+
+.driver-popover-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.5rem !important;
+  margin-top: 0.75rem !important;
+}
+
+.driver-popover-progress-text {
+  font-size: 0.76rem !important;
+  font-weight: 700 !important;
+  color: var(--muni-red) !important;
+  background: var(--muni-red-tint) !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: var(--radius-pill) !important;
+  border: 1px solid var(--muni-red-border) !important;
+}
+
+.driver-popover-next-btn,
+.driver-popover-prev-btn,
+.driver-popover-close-btn {
+  font-family: var(--font-family) !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  border-radius: var(--radius-pill) !important;
+  padding: 0.4rem 0.9rem !important;
+  transition: all 0.2s ease !important;
+  text-shadow: none !important;
+}
+
+.driver-popover-next-btn {
+  background: var(--muni-red) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(184, 0, 3, 0.3) !important;
+}
+
+.driver-popover-next-btn:hover {
+  background: var(--muni-red-dark) !important;
+}
+
+.driver-popover-prev-btn {
+  background: #F1F5F9 !important;
+  color: #334155 !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+.driver-popover-prev-btn:hover {
+  background: #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+.driver-popover-close-btn {
+  color: #94A3B8 !important;
+}
+
+.driver-popover-close-btn:hover {
+  color: #0F172A !important;
+}
+

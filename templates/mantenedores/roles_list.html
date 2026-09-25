@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Roles y Perfiles • Ilustre Municipalidad de La Serena{% endblock %}
+
+{% block content %}
+<!-- Cabecera de Página Stitch -->
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <div class="d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--muni-gold-tint); color: var(--muni-gold);">
+                <i class="bi bi-shield-check fs-5"></i>
+            </div>
+            <h2 class="fw-bold mb-0" style="color: var(--text-main); letter-spacing: -0.025em; font-size: 1.65rem;">
+                Roles y Perfiles Oficiales
+            </h2>
+        </div>
+        <p class="small mb-0" style="color: var(--text-muted);">
+            Catálogo de perfiles y niveles de autorización institucional para el personal municipal
+        </p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'usuarios:roles_excel' %}" class="btn-stitch btn-stitch-excel">
+            <i class="bi bi-file-earmark-excel"></i>
+            <span>Exportar Excel</span>
+        </a>
+        <button type="button" class="btn-stitch btn-stitch-primary" data-bs-toggle="modal" data-bs-target="#nuevoRolModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>Nuevo Rol</span>
+        </button>
+    </div>
+</div>
+
+<div class="card-stitch">
+    <!-- Barra superior de búsqueda Stitch -->
+    <div class="card-stitch-header flex-column flex-md-row gap-3">
+        <form method="GET" class="search-box-stitch">
+            <i class="bi bi-search"></i>
+            <input type="text" name="q" value="{{ search }}" placeholder="Buscar por rol o descripción...">
+            {% if search %}
+            <a href="{% url 'usuarios:roles_list' %}" class="text-secondary ms-1" title="Limpiar filtro"><i class="bi bi-x-circle-fill"></i></a>
+            {% endif %}
+        </form>
+        <div>
+            <span class="badge-stitch-tag">
+                Roles Oficiales: <strong class="ms-1" style="color: var(--muni-gold);">{{ page_obj.paginator.count }}</strong>
+            </span>
+        </div>
+    </div>
+
+    <!-- Tabla Stitch -->
+    <div class="table-responsive">
+        <table class="table-stitch">
+            <thead>
+                <tr>
+                    <th style="width: 60px;">#</th>
+                    <th>Nombre del Rol</th>
+                    <th>Descripción de Facultades</th>
+                    <th class="text-center" style="width: 120px;">Estado</th>
+                    <th class="text-center" style="width: 110px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rol in page_obj %}
+                <tr>
+                    <td style="color: var(--text-light); font-weight: 600;">{{ forloop.counter0|add:page_obj.start_index }}</td>
+                    <td class="fw-bold" style="color: var(--text-main);">{{ rol.nombre }}</td>
+                    <td style="color: var(--text-muted);">{{ rol.descripcion|default:"-" }}</td>
+                    <td class="text-center">
+                        {% if rol.activo %}
+                        <span class="badge-stitch-activo">Activo</span>
+                        {% else %}
+                        <span class="badge-stitch-inactivo">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn-stitch-icon me-1" title="Editar Rol" data-bs-toggle="modal" data-bs-target="#editRolModal{{ rol.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('{% url 'usuarios:roles_toggle' rol.id %}', '{{ rol.nombre }}', {{ rol.activo|yesno:'true,false' }})" class="btn-stitch-icon btn-stitch-icon-delete" title="{% if rol.activo %}Desactivar{% else %}Activar{% endif %}">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Modal Editar Rol Stitch Style -->
+                <div class="modal fade" id="editRolModal{{ rol.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content modal-content-stitch">
+                            <div class="modal-header-stitch">
+                                <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Editar Rol: {{ rol.nombre }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" action="{% url 'usuarios:roles_edit' rol.id %}">
+                                {% csrf_token %}
+                                <div class="modal-body p-4">
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre del Rol *</label>
+                                        <input type="text" name="nombre" value="{{ rol.nombre }}" class="input-stitch" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Descripción</label>
+                                        <textarea name="descripcion" class="input-stitch" rows="3">{{ rol.descripcion|default:"" }}</textarea>
+                                    </div>
+                                    <div class="form-check form-switch mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                                        <input class="form-check-input" type="checkbox" name="activo" id="activoSwitch{{ rol.id }}" {% if rol.activo %}checked{% endif %}>
+                                        <label class="form-check-label small fw-semibold" for="activoSwitch{{ rol.id }}" style="color: var(--text-main);">Rol Activo en el Sistema</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer-stitch">
+                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-5" style="color: var(--text-muted);">
+                        <i class="bi bi-shield-x fs-1 d-block mb-2" style="color: var(--text-light);"></i>
+                        No se encontraron roles registrados.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación Stitch -->
+    {% if page_obj.has_other_pages %}
+    <div class="p-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2" style="border-color: var(--border-stitch) !important;">
+        <div class="small" style="color: var(--text-muted);">
+            Mostrando <strong>{{ page_obj.start_index }} - {{ page_obj.end_index }}</strong> de <strong>{{ page_obj.paginator.count }}</strong> roles
+        </div>
+        <nav>
+            <div class="pagination-stitch">
+                {% if page_obj.has_previous %}
+                <a class="page-link-stitch" href="?page={{ page_obj.previous_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    <i class="bi bi-chevron-left"></i> Anterior
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled"><i class="bi bi-chevron-left"></i> Anterior</span>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <a class="page-link-stitch {% if page_obj.number == num %}active{% endif %}" href="?page={{ num }}{% if search %}&q={{ search }}{% endif %}">
+                    {{ num }}
+                </a>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a class="page-link-stitch" href="?page={{ page_obj.next_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    Siguiente <i class="bi bi-chevron-right"></i>
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled">Siguiente <i class="bi bi-chevron-right"></i></span>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal Nuevo Rol Stitch Style -->
+<div class="modal fade" id="nuevoRolModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-stitch">
+            <div class="modal-header-stitch">
+                <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Crear Nuevo Rol</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{% url 'usuarios:roles_create' %}">
+                {% csrf_token %}
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre del Rol *</label>
+                        <input type="text" name="nombre" class="input-stitch" placeholder="Ej. Gestor Comunitario" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Descripción</label>
+                        <textarea name="descripcion" class="input-stitch" rows="3" placeholder="Descripción de facultades y funciones..."></textarea>
+                    </div>
+                    <div class="form-check form-switch mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                        <input class="form-check-input" type="checkbox" name="activo" id="activoNuevoRol" checked>
+                        <label class="form-check-label small fw-semibold" for="activoNuevoRol" style="color: var(--text-main);">Rol Activo en el Sistema</label>
+                    </div>
+                </div>
+                <div class="modal-footer-stitch">
+                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-stitch btn-stitch-primary">Crear Rol</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

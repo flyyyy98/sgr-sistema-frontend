@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Padrón de Vecinos (CRUD) • Ilustre Municipalidad de La Serena{% endblock %}
+
+{% block content %}
+<!-- Cabecera de Página Stitch -->
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <div class="d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--muni-red-tint); color: var(--muni-red);">
+                <i class="bi bi-person-lines-fill fs-5"></i>
+            </div>
+            <h2 class="fw-bold mb-0" style="color: var(--text-main); letter-spacing: -0.025em; font-size: 1.65rem;">
+                Padrón de Vecinos
+            </h2>
+        </div>
+        <p class="small mb-0" style="color: var(--text-muted);">
+            Gestión ciudadana territorial, registro de atenciones vecinales y solicitudes comunales (CRUD)
+        </p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'vecinos:vecinos_excel' %}" class="btn-stitch btn-stitch-excel">
+            <i class="bi bi-file-earmark-excel"></i>
+            <span>Exportar Excel</span>
+        </a>
+        <button type="button" class="btn-stitch btn-stitch-primary" data-bs-toggle="modal" data-bs-target="#nuevoVecinoModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>Nuevo Vecino</span>
+        </button>
+    </div>
+</div>
+
+<div class="card-stitch">
+    <!-- Barra superior de búsqueda Stitch -->
+    <div class="card-stitch-header flex-column flex-md-row gap-3">
+        <form method="GET" class="search-box-stitch">
+            <i class="bi bi-search"></i>
+            <input type="text" name="q" value="{{ search }}" placeholder="Buscar por Nombre, RUT, Dirección o Territorio...">
+            {% if search %}
+            <a href="{% url 'vecinos:vecinos_list' %}" class="text-secondary ms-1" title="Limpiar filtro"><i class="bi bi-x-circle-fill"></i></a>
+            {% endif %}
+        </form>
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge-stitch-tag">
+                Total Vecinos: <strong class="ms-1" style="color: var(--muni-red);">{{ page_obj.paginator.count }}</strong>
+            </span>
+        </div>
+    </div>
+
+    <!-- Tabla Stitch -->
+    <div class="table-responsive">
+        <table class="table-stitch">
+            <thead>
+                <tr>
+                    <th style="width: 60px;">#</th>
+                    <th>Vecino(a)</th>
+                    <th>RUT</th>
+                    <th>Dirección Territorial</th>
+                    <th>Teléfono</th>
+                    <th>Territorio Asignado</th>
+                    <th>Tipo de Gestión</th>
+                    <th class="text-center" style="width: 120px;">Estado</th>
+                    <th class="text-center" style="width: 110px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for v in page_obj %}
+                <tr>
+                    <td style="color: var(--text-light); font-weight: 600;">{{ forloop.counter0|add:page_obj.start_index }}</td>
+                    <td>
+                        <div class="fw-bold" style="color: var(--text-main);">{{ v.nombre }}</div>
+                    </td>
+                    <td style="font-family: monospace; font-size: 0.88rem; color: var(--text-muted);">{{ v.rut }}</td>
+                    <td class="small" style="color: var(--text-muted);">{{ v.direccion }}</td>
+                    <td class="small" style="color: var(--text-muted);">{{ v.telefono|default:"-" }}</td>
+                    <td>
+                        <span class="badge-stitch-tag">
+                            <i class="bi bi-geo-alt-fill me-1" style="color: var(--muni-blue);"></i>{{ v.territorio.nombre|default:"Sin Territorio" }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if v.tipo_gestion == 'Solicitud' %}
+                        <span class="badge-stitch-tag" style="background: var(--muni-blue-tint); color: var(--muni-blue); border-color: rgba(2, 132, 199, 0.2);">
+                            <i class="bi bi-file-earmark-text-fill me-1"></i>Solicitud
+                        </span>
+                        {% elif v.tipo_gestion == 'Reclamo' %}
+                        <span class="badge-stitch-tag" style="background: var(--muni-red-tint); color: var(--muni-red); border-color: var(--muni-red-border);">
+                            <i class="bi bi-exclamation-triangle-fill me-1"></i>Reclamo
+                        </span>
+                        {% elif v.tipo_gestion == 'Consulta' %}
+                        <span class="badge-stitch-tag" style="background: var(--muni-purple-tint); color: var(--muni-purple); border-color: rgba(124, 58, 237, 0.2);">
+                            <i class="bi bi-question-circle-fill me-1"></i>Consulta
+                        </span>
+                        {% else %}
+                        <span class="badge-stitch-tag" style="background: var(--muni-green-tint); color: var(--muni-green); border-color: var(--muni-green-border);">
+                            <i class="bi bi-compass-fill me-1"></i>Orientación
+                        </span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if v.activo %}
+                        <span class="badge-stitch-activo">Activo</span>
+                        {% else %}
+                        <span class="badge-stitch-inactivo">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn-stitch-icon me-1" title="Editar Vecino" data-bs-toggle="modal" data-bs-target="#editVecinoModal{{ v.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('{% url 'vecinos:vecinos_toggle' v.id %}', '{{ v.nombre }}', {{ v.activo|yesno:'true,false' }})" class="btn-stitch-icon btn-stitch-icon-delete" title="{% if v.activo %}Desactivar{% else %}Activar{% endif %}">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Modal Editar Vecino Stitch Style -->
+                <div class="modal fade" id="editVecinoModal{{ v.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content modal-content-stitch">
+                            <div class="modal-header-stitch">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px; border-radius: var(--radius-xs); background: var(--muni-red-tint); color: var(--muni-red);">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </div>
+                                    <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Editar Registro: {{ v.nombre }}</h5>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" action="{% url 'vecinos:vecinos_edit' v.id %}">
+                                {% csrf_token %}
+                                <div class="modal-body p-4">
+                                    <div class="row g-3">
+                                        <div class="col-md-7">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre Completo *</label>
+                                            <input type="text" name="nombre" value="{{ v.nombre }}" class="input-stitch" required>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">RUT *</label>
+                                            <input type="text" name="rut" value="{{ v.rut }}" class="input-stitch" required>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Dirección de Residencia *</label>
+                                            <input type="text" name="direccion" value="{{ v.direccion }}" class="input-stitch" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Teléfono de Contacto</label>
+                                            <input type="text" name="telefono" value="{{ v.telefono|default:'' }}" class="input-stitch">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Territorio / Delegación</label>
+                                            <select name="territorio" class="input-stitch">
+                                                <option value="">-- Sin Asignar --</option>
+                                                {% for terr in territorios %}
+                                                <option value="{{ terr.id }}" {% if v.territorio_id == terr.id %}selected{% endif %}>{{ terr.nombre }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Tipo de Gestión *</label>
+                                            <select name="tipo_gestion" class="input-stitch" required>
+                                                <option value="Solicitud" {% if v.tipo_gestion == 'Solicitud' %}selected{% endif %}>Solicitud</option>
+                                                <option value="Reclamo" {% if v.tipo_gestion == 'Reclamo' %}selected{% endif %}>Reclamo</option>
+                                                <option value="Consulta" {% if v.tipo_gestion == 'Consulta' %}selected{% endif %}>Consulta</option>
+                                                <option value="Orientacion" {% if v.tipo_gestion == 'Orientacion' %}selected{% endif %}>Orientación</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" name="activo" id="activoSwitchVec{{ v.id }}" {% if v.activo %}checked{% endif %}>
+                                                <label class="form-check-label small fw-semibold" for="activoSwitchVec{{ v.id }}" style="color: var(--text-main);">Vecino(a) Activo en el Padrón</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer-stitch">
+                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <tr>
+                    <td colspan="9" class="text-center py-5" style="color: var(--text-muted);">
+                        <i class="bi bi-people fs-1 d-block mb-2" style="color: var(--text-light);"></i>
+                        No se encontraron vecinos registrados con los filtros aplicados.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación Stitch -->
+    {% if page_obj.has_other_pages %}
+    <div class="p-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2" style="border-color: var(--border-stitch) !important;">
+        <div class="small" style="color: var(--text-muted);">
+            Mostrando <strong>{{ page_obj.start_index }} - {{ page_obj.end_index }}</strong> de <strong>{{ page_obj.paginator.count }}</strong> vecinos
+        </div>
+        <nav>
+            <div class="pagination-stitch">
+                {% if page_obj.has_previous %}
+                <a class="page-link-stitch" href="?page={{ page_obj.previous_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    <i class="bi bi-chevron-left"></i> Anterior
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled"><i class="bi bi-chevron-left"></i> Anterior</span>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <a class="page-link-stitch {% if page_obj.number == num %}active{% endif %}" href="?page={{ num }}{% if search %}&q={{ search }}{% endif %}">
+                    {{ num }}
+                </a>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a class="page-link-stitch" href="?page={{ page_obj.next_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    Siguiente <i class="bi bi-chevron-right"></i>
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled">Siguiente <i class="bi bi-chevron-right"></i></span>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal Nuevo Vecino Stitch Style -->
+<div class="modal fade" id="nuevoVecinoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content modal-content-stitch">
+            <div class="modal-header-stitch">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="d-inline-flex align-items-center justify-content-center" style="width: 32px; height: 32px; border-radius: var(--radius-xs); background: var(--muni-red-tint); color: var(--muni-red);">
+                        <i class="bi bi-person-plus-fill"></i>
+                    </div>
+                    <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Registrar Nuevo Vecino</h5>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{% url 'vecinos:vecinos_create' %}">
+                {% csrf_token %}
+                <div class="modal-body p-4">
+                    <div class="row g-3">
+                        <div class="col-md-7">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre Completo *</label>
+                            <input type="text" name="nombre" class="input-stitch" placeholder="Ej. Ana González Rojas" required>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">RUT *</label>
+                            <input type="text" name="rut" class="input-stitch" placeholder="12.345.678-9" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Dirección de Residencia *</label>
+                            <input type="text" name="direccion" class="input-stitch" placeholder="Ej. Av. Francisco de Aguirre 500" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Teléfono de Contacto</label>
+                            <input type="text" name="telefono" class="input-stitch" placeholder="+56 9 8765 4321">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Territorio / Delegación</label>
+                            <select name="territorio" class="input-stitch">
+                                <option value="">-- Sin Asignar --</option>
+                                {% for terr in territorios %}
+                                <option value="{{ terr.id }}">{{ terr.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small fw-semibold" style="color: var(--text-main);">Tipo de Gestión *</label>
+                            <select name="tipo_gestion" class="input-stitch" required>
+                                <option value="Solicitud" selected>Solicitud</option>
+                                <option value="Reclamo">Reclamo</option>
+                                <option value="Consulta">Consulta</option>
+                                <option value="Orientacion">Orientación</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="activo" id="activoNuevoVecino" checked>
+                                <label class="form-check-label small fw-semibold" for="activoNuevoVecino" style="color: var(--text-main);">Registro Activo</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer-stitch">
+                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-stitch btn-stitch-primary">Registrar Vecino</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

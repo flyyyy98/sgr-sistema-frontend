@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Delegaciones Comunales • Ilustre Municipalidad de La Serena{% endblock %}
+
+{% block content %}
+<!-- Cabecera de Página Stitch -->
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <div class="d-inline-flex align-items-center justify-content-center" style="width: 36px; height: 36px; border-radius: var(--radius-sm); background: var(--muni-blue-tint); color: var(--muni-blue);">
+                <i class="bi bi-geo-alt-fill fs-5"></i>
+            </div>
+            <h2 class="fw-bold mb-0" style="color: var(--text-main); letter-spacing: -0.025em; font-size: 1.65rem;">
+                Delegaciones Municipales
+            </h2>
+        </div>
+        <p class="small mb-0" style="color: var(--text-muted);">
+            Cobertura territorial de las 6 delegaciones comunales y delegados territoriales asignados
+        </p>
+    </div>
+    <div class="d-flex gap-2">
+        <a href="{% url 'territorial:delegaciones_excel' %}" class="btn-stitch btn-stitch-excel">
+            <i class="bi bi-file-earmark-excel"></i>
+            <span>Exportar Excel</span>
+        </a>
+        <button type="button" class="btn-stitch btn-stitch-primary" data-bs-toggle="modal" data-bs-target="#nuevaDelegacionModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>Nueva Delegación</span>
+        </button>
+    </div>
+</div>
+
+<div class="card-stitch">
+    <!-- Barra superior de búsqueda Stitch -->
+    <div class="card-stitch-header flex-column flex-md-row gap-3">
+        <form method="GET" class="search-box-stitch">
+            <i class="bi bi-search"></i>
+            <input type="text" name="q" value="{{ search }}" placeholder="Buscar por delegación, dirección o delegado...">
+            {% if search %}
+            <a href="{% url 'territorial:delegaciones_list' %}" class="text-secondary ms-1" title="Limpiar filtro"><i class="bi bi-x-circle-fill"></i></a>
+            {% endif %}
+        </form>
+        <div>
+            <span class="badge-stitch-tag">
+                Sedes Registradas: <strong class="ms-1" style="color: var(--muni-blue);">{{ page_obj.paginator.count }}</strong>
+            </span>
+        </div>
+    </div>
+
+    <!-- Tabla Stitch -->
+    <div class="table-responsive">
+        <table class="table-stitch">
+            <thead>
+                <tr>
+                    <th style="width: 60px;">#</th>
+                    <th>Delegación Municipal</th>
+                    <th>Dirección Territorial</th>
+                    <th>Comuna</th>
+                    <th>Delegado a Cargo</th>
+                    <th class="text-center" style="width: 120px;">Estado</th>
+                    <th class="text-center" style="width: 110px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in page_obj %}
+                <tr>
+                    <td style="color: var(--text-light); font-weight: 600;">{{ forloop.counter0|add:page_obj.start_index }}</td>
+                    <td class="fw-bold" style="color: var(--text-main);">{{ d.nombre }}</td>
+                    <td style="color: var(--text-muted);">{{ d.direccion }}</td>
+                    <td>{{ d.comuna }}</td>
+                    <td>
+                        {% if d.delegado %}
+                        <span class="badge-stitch-tag">
+                            <i class="bi bi-person-badge-fill me-1" style="color: var(--muni-blue);"></i>{{ d.delegado.nombre_completo }}
+                        </span>
+                        {% else %}
+                        <span class="small" style="color: var(--text-light); font-style: italic;">Sin Delegado Asignado</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        {% if d.activo %}
+                        <span class="badge-stitch-activo">Activo</span>
+                        {% else %}
+                        <span class="badge-stitch-inactivo">Inactivo</span>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal{{ d.id }}">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('{% url 'territorial:delegaciones_toggle' d.id %}', '{{ d.nombre }}', {{ d.activo|yesno:'true,false' }})" class="btn-stitch-icon btn-stitch-icon-delete" title="{% if d.activo %}Desactivar{% else %}Activar{% endif %}">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Modal Editar Delegación Stitch Style -->
+                <div class="modal fade" id="editDelegacionModal{{ d.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content modal-content-stitch">
+                            <div class="modal-header-stitch">
+                                <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Editar Sede: {{ d.nombre }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form method="POST" action="{% url 'territorial:delegaciones_edit' d.id %}">
+                                {% csrf_token %}
+                                <div class="modal-body p-4">
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre de la Delegación *</label>
+                                        <input type="text" name="nombre" value="{{ d.nombre }}" class="input-stitch" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Dirección Territorial *</label>
+                                        <input type="text" name="direccion" value="{{ d.direccion }}" class="input-stitch" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Comuna *</label>
+                                        <input type="text" name="comuna" value="{{ d.comuna }}" class="input-stitch" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Delegado a Cargo</label>
+                                        <select name="delegado" class="input-stitch">
+                                            <option value="">-- Sin Delegado Asignado --</option>
+                                            {% for delg in delegados %}
+                                            <option value="{{ delg.id }}" {% if d.delegado_id == delg.id %}selected{% endif %}>{{ delg.nombre_completo }} ({{ delg.email }})</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-check form-switch mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                                        <input class="form-check-input" type="checkbox" name="activo" id="activoSwitchDelg{{ d.id }}" {% if d.activo %}checked{% endif %}>
+                                        <label class="form-check-label small fw-semibold" for="activoSwitchDelg{{ d.id }}" style="color: var(--text-main);">Delegación Activa</label>
+                                    </div>
+                                </div>
+                                <div class="modal-footer-stitch">
+                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center py-5" style="color: var(--text-muted);">
+                        <i class="bi bi-geo-alt fs-1 d-block mb-2" style="color: var(--text-light);"></i>
+                        No se encontraron delegaciones registradas.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginación Stitch -->
+    {% if page_obj.has_other_pages %}
+    <div class="p-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2" style="border-color: var(--border-stitch) !important;">
+        <div class="small" style="color: var(--text-muted);">
+            Mostrando <strong>{{ page_obj.start_index }} - {{ page_obj.end_index }}</strong> de <strong>{{ page_obj.paginator.count }}</strong> sedes
+        </div>
+        <nav>
+            <div class="pagination-stitch">
+                {% if page_obj.has_previous %}
+                <a class="page-link-stitch" href="?page={{ page_obj.previous_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    <i class="bi bi-chevron-left"></i> Anterior
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled"><i class="bi bi-chevron-left"></i> Anterior</span>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                <a class="page-link-stitch {% if page_obj.number == num %}active{% endif %}" href="?page={{ num }}{% if search %}&q={{ search }}{% endif %}">
+                    {{ num }}
+                </a>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a class="page-link-stitch" href="?page={{ page_obj.next_page_number }}{% if search %}&q={{ search }}{% endif %}">
+                    Siguiente <i class="bi bi-chevron-right"></i>
+                </a>
+                {% else %}
+                <span class="page-link-stitch disabled">Siguiente <i class="bi bi-chevron-right"></i></span>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+    {% endif %}
+</div>
+
+<!-- Modal Nueva Delegación Stitch Style -->
+<div class="modal fade" id="nuevaDelegacionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-content-stitch">
+            <div class="modal-header-stitch">
+                <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.15rem;">Nueva Delegación Municipal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{% url 'territorial:delegaciones_create' %}">
+                {% csrf_token %}
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Nombre de la Delegación *</label>
+                        <input type="text" name="nombre" class="input-stitch" placeholder="Ej. Centro, Las Compañías, Pampa..." required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Dirección Territorial *</label>
+                        <input type="text" name="direccion" class="input-stitch" placeholder="Ej. Arturo Prat 451" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Comuna *</label>
+                        <input type="text" name="comuna" value="La Serena" class="input-stitch" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold" style="color: var(--text-main);">Delegado Responsable</label>
+                        <select name="delegado" class="input-stitch">
+                            <option value="">-- Sin Delegado Asignado --</option>
+                            {% for delg in delegados %}
+                            <option value="{{ delg.id }}">{{ delg.nombre_completo }} ({{ delg.email }})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-check form-switch mt-3 pt-2 border-top" style="border-color: var(--border-stitch) !important;">
+                        <input class="form-check-input" type="checkbox" name="activo" id="activoNuevaDelg" checked>
+                        <label class="form-check-label small fw-semibold" for="activoNuevaDelg" style="color: var(--text-main);">Delegación Activa</label>
+                    </div>
+                </div>
+                <div class="modal-footer-stitch">
+                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-stitch btn-stitch-primary">Crear Delegación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

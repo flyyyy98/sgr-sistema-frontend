@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Centro de Reportes • Ilustre Municipalidad de La Serena{% endblock %}
+
+{% block content %}
+<!-- Cabecera de Página Stitch -->
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+    <div>
+        <div class="d-flex align-items-center gap-2 mb-1">
+            <img src="{% static 'img/escudo_laserena.svg' %}" alt="La Serena" style="width: 24px; height: auto;">
+            <h2 class="fw-bold mb-0" style="color: var(--text-main); letter-spacing: -0.025em; font-size: 1.65rem;">
+                Centro Oficial de Reportes y Descargas
+            </h2>
+        </div>
+        <p class="small mb-0" style="color: var(--text-muted);">
+            Exportación autónoma y consolidada de cada mantenedor institucional en formato Microsoft Excel (.xlsx)
+        </p>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="card-stitch">
+            <div class="card-stitch-header">
+                <div>
+                    <h5 class="fw-bold mb-0" style="color: var(--text-main); font-size: 1.05rem;">
+                        <i class="bi bi-file-earmark-spreadsheet-fill text-success me-2"></i>Descarga de Planillas Institucionales
+                    </h5>
+                    <div class="small" style="color: var(--text-muted);">Formatos .xlsx con membrete y cabeceras oficiales de La Serena</div>
+                </div>
+                <span class="badge-stitch-tag" style="background: var(--muni-green-tint); color: var(--muni-green); border-color: var(--muni-green-border); font-weight: 600;">
+                    <i class="bi bi-filetype-xlsx me-1"></i> Excel 100% Funcional
+                </span>
+            </div>
+            <div class="p-4">
+                <p class="small mb-4" style="color: var(--text-muted); line-height: 1.5;">
+                    En conformidad con los requisitos de la Segunda Entrega, cada base de datos cuenta con su propio motor de exportación en planillas Microsoft Excel, formateadas con bordes, filtros, anchos de columna automáticos y estilos oficiales de la Ilustre Municipalidad de La Serena.
+                </p>
+
+                <div class="d-flex flex-column gap-3">
+                    <!-- Reporte Vecinos -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--muni-red-tint); color: var(--muni-red);">
+                                <i class="bi bi-person-lines-fill fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte del Padrón de Vecinos (CRUD)</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Consolidado de ciudadanos con RUT, dirección, teléfono, territorio y tipo de atención.</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'vecinos:vecinos_excel' %}" class="btn-stitch btn-stitch-excel flex-shrink-0">
+                            <i class="bi bi-download"></i> <span>Descargar Excel</span>
+                        </a>
+                    </div>
+
+                    <!-- Reporte Delegaciones -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--muni-blue-tint); color: var(--muni-blue);">
+                                <i class="bi bi-geo-alt-fill fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte de Delegaciones Municipales</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Listado territorial de las 6 delegaciones comunales y delegados responsables asignados.</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'territorial:delegaciones_excel' %}" class="btn-stitch btn-stitch-excel flex-shrink-0">
+                            <i class="bi bi-download"></i> <span>Descargar Excel</span>
+                        </a>
+                    </div>
+
+                    <!-- Reporte Usuarios -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--muni-purple-tint); color: var(--muni-purple);">
+                                <i class="bi bi-people-fill fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte de Personal y Usuarios</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Directorio oficial de funcionarios, cuentas de acceso, RUT y roles institucionales.</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'usuarios:usuarios_excel' %}" class="btn-stitch btn-stitch-excel flex-shrink-0">
+                            <i class="bi bi-download"></i> <span>Descargar Excel</span>
+                        </a>
+                    </div>
+
+                    <!-- Reporte Roles -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--muni-gold-tint); color: var(--muni-gold);">
+                                <i class="bi bi-shield-check fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte de Roles y Perfiles</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Catálogo de los 10 roles institucionales y perfiles de autorización municipal.</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'usuarios:roles_excel' %}" class="btn-stitch btn-stitch-excel flex-shrink-0">
+                            <i class="bi bi-download"></i> <span>Descargar Excel</span>
+                        </a>
+                    </div>
+
+                    <!-- Reporte Metas -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: var(--muni-green-tint); color: var(--muni-green);">
+                                <i class="bi bi-bullseye fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte de Ítems de Metas</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Indicadores cuantitativos de cobertura comunal y niveles de satisfacción.</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'territorial:metas_excel' %}" class="btn-stitch btn-stitch-excel flex-shrink-0">
+                            <i class="bi bi-download"></i> <span>Descargar Excel</span>
+                        </a>
+                    </div>
+
+                    <!-- Reporte Tipos y Subatenciones -->
+                    <div class="card-stitch p-3 d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3" style="background: #ffffff;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center justify-content-center flex-shrink-0" style="width: 46px; height: 46px; border-radius: var(--radius-sm); background: rgba(15, 23, 42, 0.06); color: var(--text-main);">
+                                <i class="bi bi-diagram-3-fill fs-4"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-1 fw-bold" style="color: var(--text-main); font-size: 0.98rem;">Reporte de Tipos y Subatenciones</h6>
+                                <div class="small" style="color: var(--text-muted); font-size: 0.82rem;">Estructura jerárquica de servicios (Social, Salud, Educación, Vivienda).</div>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'atenciones:tipo_atencion_excel' %}" class="btn-stitch btn-stitch-excel" title="Exportar Tipos">
+                                <i class="bi bi-download"></i> <span>Tipos</span>
+                            </a>
+                            <a href="{% url 'atenciones:sub_atencion_excel' %}" class="btn-stitch btn-stitch-excel" title="Exportar Subatenciones">
+                                <i class="bi bi-download"></i> <span>Subatenciones</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel Lateral Informativo -->
+    <div class="col-lg-4">
+        <div class="card-stitch p-4 mb-4">
+            <h6 class="fw-bold mb-3" style="color: var(--text-main); font-size: 1rem;">
+                <i class="bi bi-award-fill text-danger me-2"></i>Cumplimiento Segunda Entrega
+            </h6>
+            <div class="d-flex flex-column gap-2 small" style="color: var(--text-muted);">
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Backend Django Autónomo</strong> sin N8N ni software de pago.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Cero Django Admin</strong>: Todas las vistas y formularios son propios.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Confirmaciones SweetAlert2</strong> integradas en borrado lógico.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Borrado Lógico Transversal</strong> con estado Activo/Inactivo.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Paginación Tradicional</strong> sin scroll infinito.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Exportador Microsoft Excel (.xlsx)</strong> con openpyxl.</span>
+                </div>
+                <div class="d-flex align-items-start gap-2">
+                    <i class="bi bi-check-circle-fill text-success mt-1"></i>
+                    <span><strong>Seguridad y Claves</strong> con código PIN de 6 dígitos.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-stitch p-4" style="background: linear-gradient(135deg, var(--muni-red) 0%, var(--muni-red-dark) 100%); color: #ffffff; border: none;">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-cloud-check-fill fs-5"></i>
+                <h6 class="fw-bold mb-0">Despliegue e Infraestructura</h6>
+            </div>
+            <p class="small mb-3" style="color: rgba(255, 255, 255, 0.88); line-height: 1.45;">
+                Configurado con WSGI/ASGI para producción en AWS (EC2 / RDS PostgreSQL) con Gunicorn y Nginx.
+            </p>
+            <a href="{% url 'dashboard:inicio' %}" class="btn btn-light btn-sm fw-bold" style="color: var(--muni-red); border-radius: var(--radius-sm);">
+                <i class="bi bi-arrow-left me-1"></i> Volver al Inicio
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
