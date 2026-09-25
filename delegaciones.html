@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css">
     <!-- Driver.js CSS (Biblioteca Oficial de Tutorial Guiado - kamranahmedse/driver.js) -->
     <link rel="stylesheet" href="static/vendor/driverjs/driver.css">
-    <!-- Normas Gráficas La Serena & UI/UX Pro Max Stitch CSS -->
+    <!-- Normas Gráficas Oficiales Ilustre Municipalidad de La Serena -->
     <link rel="stylesheet" href="static/css/muni-laserena.css">
     
     <style>
@@ -33,24 +33,27 @@
 </head>
 <body>
 
-<!-- Stitch / UI Design Preview Navigation Bar -->
-<div id="stitch-preview-bar" style="background: #111827; color: #F9FAFB; padding: 8px 16px; font-size: 12px; font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #B80003; position: sticky; top: 0; z-index: 99999;">
-    <div style="display: flex; align-items: center; gap: 8px;">
-        <span style="background: #B80003; color: white; padding: 2px 8px; border-radius: 4px; font-weight: 700; font-size: 11px;">STITCH PREVIEW</span>
-        <span style="font-weight: 600;">SGR La Serena • Vistas del Sistema:</span>
+<!-- Barra Superior Oficial La Serena -->
+<div id="muni-top-nav-bar" style="background: #070D1E; color: #E2E8F0; padding: 7px 18px; font-size: 12px; font-family: 'Inter', system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: space-between; border-bottom: 2.5px solid #B80003; position: sticky; top: 0; z-index: 99999;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="index.html" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: white;">
+            <img src="escudo_laserena.svg" alt="Escudo La Serena" style="height: 24px; width: 24px; object-fit: contain;">
+            <span style="background: #B80003; color: white; padding: 2px 8px; border-radius: 9999px; font-weight: 800; font-size: 10px; letter-spacing: 0.5px;">SGR LA SERENA</span>
+            <span style="font-weight: 700; color: #F8FAFC; font-size: 12px;">Plataforma Territorial</span>
+        </a>
     </div>
-    <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-        <a href="index.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Dashboard</a>
-        <a href="reportes.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Reportes</a>
-        <a href="vecinos.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Vecinos</a>
-        <a href="usuarios.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Usuarios</a>
-        <a href="delegaciones.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Delegaciones</a>
-        <a href="roles.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Roles</a>
-        <a href="metas.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Metas</a>
-        <a href="tipos_atencion.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Tipos Atención</a>
-        <a href="sub_atenciones.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Sub-Atenciones</a>
-        <a href="login.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Login</a>
-        <a href="recuperar_password.html" style="color: #E5E7EB; text-decoration: none; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">Recuperar</a>
+    <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+        <a href="index.html" style="color: #F8FAFC; text-decoration: none; font-weight: 700; font-size: 11px; padding: 4px 10px; background: rgba(255,255,255,0.14); border-radius: 8px; border: 1px solid rgba(255,255,255,0.18);">← Plataforma SGR</a>
+        <span style="color: #475569;">|</span>
+        <a href="vecinos.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Vecinos</a>
+        <a href="reportes.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Reportes .XLSX</a>
+        <a href="usuarios.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Usuarios</a>
+        <a href="delegaciones.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Delegaciones</a>
+        <a href="metas.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Metas</a>
+        <a href="roles.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Roles</a>
+        <a href="tipos_atencion.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Tipos</a>
+        <a href="sub_atenciones.html" style="color: #CBD5E1; text-decoration: none; font-size: 11px; padding: 3px 8px; border-radius: 6px;">Sub-Atenciones</a>
+        <a href="login.html" style="color: #FBBF24; text-decoration: none; font-weight: 700; font-size: 11px; padding: 3px 9px; background: rgba(251,191,36,0.12); border-radius: 6px; border: 1px solid rgba(251,191,36,0.35);">Login</a>
     </div>
 </div>
 
@@ -59,10 +62,10 @@
     <div class="muni-top-stripe"></div>
 
     <!-- Barra Superior de Navegación Oficial -->
-    <header class="navbar-stitch">
+    <header class="navbar-muni">
         <div class="d-flex align-items-center justify-content-between w-100">
             <div class="d-flex align-items-center gap-3">
-                <a href="index.html" class="brand-stitch" id="tour-brand">
+                <a href="index.html" class="brand-muni" id="tour-brand">
                     <img src="static/img/horizontal-color.svg" alt="Municipalidad de La Serena" class="brand-logo-img" onerror="this.onerror=null; this.src='static/img/escudo_laserena.svg';">
                     <div class="d-none d-md-block border-start ps-3 ms-2" style="border-color: var(--border-stitch) !important;">
                         <div class="fw-bold" style="font-size: 0.98rem; color: var(--text-main); line-height: 1.15;">Plataforma Territorial</div>
@@ -82,7 +85,7 @@
 
                 
                 <div class="dropdown" id="tour-user-dropdown">
-                    <div class="user-badge-stitch dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="user-badge-muni dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="user-badge-avatar">
                             A
                         </div>
@@ -110,18 +113,18 @@
     </header>
 
     <!-- Layout General (Sidebar + Contenido Principal) -->
-    <div class="layout-stitch">
-        <!-- Sidebar Stitch Municipal -->
-        <aside class="sidebar-stitch" id="tour-sidebar-nav">
+    <div class="layout-muni">
+        <!-- Sidebar SGR La Serena Municipal -->
+        <aside class="sidebar-muni" id="tour-sidebar-nav">
             <div class="sidebar-section-title">Navegación General</div>
-            <a href="index.html" class="nav-link-stitch ">
+            <a href="index.html" class="nav-link-muni ">
                 <i class="bi bi-speedometer2"></i>
                 <span>Inicio / Resumen</span>
             </a>
 
             <!-- Módulo Mantenedores -->
             <div class="mt-2" id="tour-mantenedores">
-                <a class="nav-link-stitch d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mantenedoresMenu" role="button" aria-expanded="true">
+                <a class="nav-link-muni d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#mantenedoresMenu" role="button" aria-expanded="true">
                     <div>
                         <i class="bi bi-folder2-open"></i>
                         <span>Mantenedores Base</span>
@@ -130,31 +133,31 @@
                 </a>
                 <div class="collapse show" id="mantenedoresMenu">
                     <div class="d-flex flex-column mt-1">
-                        <a href="vecinos.html" id="tour-vecinos-link" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="vecinos.html" id="tour-vecinos-link" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-person-lines-fill"></i>
                             <span>Padrón de Vecinos (CRUD)</span>
                         </a>
-                        <a href="delegaciones.html" class="nav-link-stitch nav-sublink-stitch active">
+                        <a href="delegaciones.html" class="nav-link-muni nav-sublink-stitch active">
                             <i class="bi bi-geo-alt"></i>
                             <span>Delegaciones Comunales</span>
                         </a>
-                        <a href="usuarios.html" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="usuarios.html" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-people"></i>
                             <span>Cuentas de Usuarios</span>
                         </a>
-                        <a href="roles.html" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="roles.html" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-shield-lock"></i>
                             <span>Roles Oficiales</span>
                         </a>
-                        <a href="metas.html" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="metas.html" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-bullseye"></i>
                             <span>Ítems de Metas</span>
                         </a>
-                        <a href="tipos_atencion.html" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="tipos_atencion.html" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-tag"></i>
                             <span>Tipos de Atención</span>
                         </a>
-                        <a href="sub_atenciones.html" class="nav-link-stitch nav-sublink-stitch ">
+                        <a href="sub_atenciones.html" class="nav-link-muni nav-sublink-stitch ">
                             <i class="bi bi-diagram-3"></i>
                             <span>Sub-Atenciones</span>
                         </a>
@@ -164,7 +167,7 @@
 
             <!-- Reportes -->
             <div class="sidebar-section-title mt-3">Reportería Oficial</div>
-            <a href="reportes.html" id="tour-reportes" class="nav-link-stitch ">
+            <a href="reportes.html" id="tour-reportes" class="nav-link-muni ">
                 <i class="bi bi-file-earmark-spreadsheet"></i>
                 <span>Descargas Excel (.xlsx)</span>
             </a>
@@ -184,7 +187,7 @@
         <!-- Contenido Central Amigable -->
         <main class="main-stitch">
             
-<!-- Cabecera de Página Stitch -->
+<!-- Cabecera de Página SGR La Serena -->
 <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
     <div>
         <div class="d-flex align-items-center gap-2 mb-1">
@@ -200,35 +203,35 @@
         </p>
     </div>
     <div class="d-flex gap-2">
-        <a href="/mantenedores/delegaciones/exportar-excel/" class="btn-stitch btn-stitch-excel">
+        <a href="/mantenedores/delegaciones/exportar-excel/" class="btn-muni btn-muni-excel">
             <i class="bi bi-file-earmark-excel"></i>
             <span>Exportar Excel</span>
         </a>
-        <button type="button" class="btn-stitch btn-stitch-primary" data-bs-toggle="modal" data-bs-target="#nuevaDelegacionModal">
+        <button type="button" class="btn-muni btn-muni-primary" data-bs-toggle="modal" data-bs-target="#nuevaDelegacionModal">
             <i class="bi bi-plus-lg"></i>
             <span>Nueva Delegación</span>
         </button>
     </div>
 </div>
 
-<div class="card-stitch">
-    <!-- Barra superior de búsqueda Stitch -->
-    <div class="card-stitch-header flex-column flex-md-row gap-3">
+<div class="card-muni">
+    <!-- Barra superior de búsqueda SGR La Serena -->
+    <div class="card-muni-header flex-column flex-md-row gap-3">
         <form method="GET" class="search-box-stitch">
             <i class="bi bi-search"></i>
             <input type="text" name="q" value="" placeholder="Buscar por delegación, dirección o delegado...">
             
         </form>
         <div>
-            <span class="badge-stitch-tag">
+            <span class="badge-muni-tag">
                 Sedes Registradas: <strong class="ms-1" style="color: var(--muni-blue);">6</strong>
             </span>
         </div>
     </div>
 
-    <!-- Tabla Stitch -->
+    <!-- Tabla SGR La Serena -->
     <div class="table-responsive">
-        <table class="table-stitch">
+        <table class="table-muni">
             <thead>
                 <tr>
                     <th style="width: 60px;">#</th>
@@ -249,27 +252,27 @@
                     <td>La Serena</td>
                     <td>
                         
-                        <span class="badge-stitch-tag">
+                        <span class="badge-muni-tag">
                             <i class="bi bi-person-badge-fill me-1" style="color: var(--muni-blue);"></i>Juan Pérez
                         </span>
                         
                     </td>
                     <td class="text-center">
                         
-                        <span class="badge-stitch-activo">Activo</span>
+                        <span class="badge-muni-activo">Activo</span>
                         
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal1">
+                        <button type="button" class="btn-muni-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal1">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/1/toggle/', 'Centro', true)" class="btn-stitch-icon btn-stitch-icon-delete" title="Desactivar">
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/1/toggle/', 'Centro', true)" class="btn-muni-icon btn-muni-icon-delete" title="Desactivar">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
 
-                <!-- Modal Editar Delegación Stitch Style -->
+                <!-- Modal Editar Delegación SGR La Serena Style -->
                 <div class="modal fade" id="editDelegacionModal1" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-content-stitch">
@@ -313,8 +316,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer-stitch">
-                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-muni btn-muni-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -328,27 +331,27 @@
                     <td>La Serena</td>
                     <td>
                         
-                        <span class="badge-stitch-tag">
+                        <span class="badge-muni-tag">
                             <i class="bi bi-person-badge-fill me-1" style="color: var(--muni-blue);"></i>María López
                         </span>
                         
                     </td>
                     <td class="text-center">
                         
-                        <span class="badge-stitch-activo">Activo</span>
+                        <span class="badge-muni-activo">Activo</span>
                         
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal2">
+                        <button type="button" class="btn-muni-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal2">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/2/toggle/', 'Norte', true)" class="btn-stitch-icon btn-stitch-icon-delete" title="Desactivar">
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/2/toggle/', 'Norte', true)" class="btn-muni-icon btn-muni-icon-delete" title="Desactivar">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
 
-                <!-- Modal Editar Delegación Stitch Style -->
+                <!-- Modal Editar Delegación SGR La Serena Style -->
                 <div class="modal fade" id="editDelegacionModal2" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-content-stitch">
@@ -392,8 +395,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer-stitch">
-                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-muni btn-muni-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -412,20 +415,20 @@
                     </td>
                     <td class="text-center">
                         
-                        <span class="badge-stitch-activo">Activo</span>
+                        <span class="badge-muni-activo">Activo</span>
                         
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal4">
+                        <button type="button" class="btn-muni-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal4">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/4/toggle/', 'Oriente', true)" class="btn-stitch-icon btn-stitch-icon-delete" title="Desactivar">
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/4/toggle/', 'Oriente', true)" class="btn-muni-icon btn-muni-icon-delete" title="Desactivar">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
 
-                <!-- Modal Editar Delegación Stitch Style -->
+                <!-- Modal Editar Delegación SGR La Serena Style -->
                 <div class="modal fade" id="editDelegacionModal4" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-content-stitch">
@@ -469,8 +472,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer-stitch">
-                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-muni btn-muni-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -489,20 +492,20 @@
                     </td>
                     <td class="text-center">
                         
-                        <span class="badge-stitch-activo">Activo</span>
+                        <span class="badge-muni-activo">Activo</span>
                         
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal5">
+                        <button type="button" class="btn-muni-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal5">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/5/toggle/', 'Rural Cordillera', true)" class="btn-stitch-icon btn-stitch-icon-delete" title="Desactivar">
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/5/toggle/', 'Rural Cordillera', true)" class="btn-muni-icon btn-muni-icon-delete" title="Desactivar">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
 
-                <!-- Modal Editar Delegación Stitch Style -->
+                <!-- Modal Editar Delegación SGR La Serena Style -->
                 <div class="modal fade" id="editDelegacionModal5" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-content-stitch">
@@ -546,8 +549,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer-stitch">
-                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-muni btn-muni-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -566,20 +569,20 @@
                     </td>
                     <td class="text-center">
                         
-                        <span class="badge-stitch-activo">Activo</span>
+                        <span class="badge-muni-activo">Activo</span>
                         
                     </td>
                     <td class="text-center">
-                        <button type="button" class="btn-stitch-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal6">
+                        <button type="button" class="btn-muni-icon me-1" title="Editar Delegación" data-bs-toggle="modal" data-bs-target="#editDelegacionModal6">
                             <i class="bi bi-pencil"></i>
                         </button>
-                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/6/toggle/', 'Rural Costa', true)" class="btn-stitch-icon btn-stitch-icon-delete" title="Desactivar">
+                        <a href="javascript:void(0);" onclick="confirmarBorradoLogico('/mantenedores/delegaciones/6/toggle/', 'Rural Costa', true)" class="btn-muni-icon btn-muni-icon-delete" title="Desactivar">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
 
-                <!-- Modal Editar Delegación Stitch Style -->
+                <!-- Modal Editar Delegación SGR La Serena Style -->
                 <div class="modal fade" id="editDelegacionModal6" tabindex="-1" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content modal-content-stitch">
@@ -623,8 +626,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer-stitch">
-                                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn-stitch btn-stitch-primary">Guardar Cambios</button>
+                                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn-muni btn-muni-primary">Guardar Cambios</button>
                                 </div>
                             </form>
                         </div>
@@ -635,7 +638,7 @@
         </table>
     </div>
 
-    <!-- Paginación Stitch -->
+    <!-- Paginación SGR La Serena -->
     
     <div class="p-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2" style="border-color: var(--border-stitch) !important;">
         <div class="small" style="color: var(--text-muted);">
@@ -668,7 +671,7 @@
     
 </div>
 
-<!-- Modal Nueva Delegación Stitch Style -->
+<!-- Modal Nueva Delegación SGR La Serena Style -->
 <div class="modal fade" id="nuevaDelegacionModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content modal-content-stitch">
@@ -712,8 +715,8 @@
                     </div>
                 </div>
                 <div class="modal-footer-stitch">
-                    <button type="button" class="btn-stitch btn-stitch-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn-stitch btn-stitch-primary">Crear Delegación</button>
+                    <button type="button" class="btn-muni btn-muni-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-muni btn-muni-primary">Crear Delegación</button>
                 </div>
             </form>
         </div>

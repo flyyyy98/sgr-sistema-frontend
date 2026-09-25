@@ -92,7 +92,7 @@ body {
 /* ==============================================================================
    NAVBAR SUPERIOR STITCH
    ============================================================================== */
-.navbar-stitch {
+.navbar-muni, .navbar-stitch {
   background: #ffffff;
   border-bottom: 1px solid var(--border-stitch);
   box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
@@ -102,20 +102,20 @@ body {
   z-index: 1030;
 }
 
-.brand-stitch {
+.brand-muni, .brand-stitch {
   display: flex;
   align-items: center;
   gap: 0.85rem;
   text-decoration: none;
 }
 
-.brand-stitch .brand-logo-img {
+.brand-muni, .brand-stitch .brand-logo-img {
   height: 40px;
   width: auto;
   object-fit: contain;
 }
 
-.brand-stitch .brand-title {
+.brand-muni, .brand-stitch .brand-title {
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--muni-red);
@@ -123,13 +123,13 @@ body {
   line-height: 1.15;
 }
 
-.brand-stitch .brand-subtitle {
+.brand-muni, .brand-stitch .brand-subtitle {
   font-size: 0.76rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
-.user-badge-stitch {
+.user-badge-muni, .user-badge-stitch {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
@@ -141,7 +141,7 @@ body {
   transition: var(--transition-stitch);
 }
 
-.user-badge-stitch:hover {
+.user-badge-muni, .user-badge-stitch:hover {
   background: #FFFFFF;
   border-color: var(--muni-red-border);
   box-shadow: var(--shadow-sm);
@@ -163,12 +163,12 @@ body {
 /* ==============================================================================
    SIDEBAR STITCH
    ============================================================================== */
-.layout-stitch {
+.layout-muni, .layout-stitch {
   display: flex;
   min-height: calc(100vh - 65px);
 }
 
-.sidebar-stitch {
+.sidebar-muni, .sidebar-stitch {
   width: 260px;
   flex-shrink: 0;
   background: #ffffff;
@@ -187,7 +187,7 @@ body {
   padding: 0.75rem 0.75rem 0.35rem 0.75rem;
 }
 
-.nav-link-stitch {
+.nav-link-muni, .nav-link-stitch {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -202,29 +202,29 @@ body {
   border-left: 3px solid transparent;
 }
 
-.nav-link-stitch i {
+.nav-link-muni, .nav-link-stitch i {
   font-size: 1.1rem;
   color: var(--text-muted);
   transition: var(--transition-stitch);
 }
 
-.nav-link-stitch:hover {
+.nav-link-muni, .nav-link-stitch:hover {
   background: var(--surface-muted);
   color: var(--muni-red);
 }
 
-.nav-link-stitch:hover i {
+.nav-link-muni, .nav-link-stitch:hover i {
   color: var(--muni-red);
 }
 
-.nav-link-stitch.active {
+.nav-link-muni, .nav-link-stitch.active {
   background: var(--muni-red-tint);
   color: var(--muni-red);
   font-weight: 600;
   border-left-color: var(--muni-red);
 }
 
-.nav-link-stitch.active i {
+.nav-link-muni, .nav-link-stitch.active i {
   color: var(--muni-red);
 }
 
@@ -255,7 +255,7 @@ body {
   overflow-y: auto;
 }
 
-.card-stitch {
+.card-muni, .card-stitch {
   background: var(--surface-card);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-stitch);
@@ -264,13 +264,13 @@ body {
   overflow: hidden;
 }
 
-.card-stitch-hover:hover {
+.card-muni, .card-stitch-hover:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
   border-color: var(--muni-red-border);
 }
 
-.card-stitch-header {
+.card-muni, .card-stitch-header {
   padding: 1.15rem 1.4rem;
   border-bottom: 1px solid var(--border-stitch);
   background: #ffffff;
@@ -305,7 +305,7 @@ body {
 /* ==============================================================================
    BOTONES STITCH UI/UX PRO MAX
    ============================================================================== */
-.btn-stitch {
+.btn-muni, .btn-stitch {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -321,54 +321,54 @@ body {
   line-height: 1.25;
 }
 
-.btn-stitch:active {
+.btn-muni, .btn-stitch:active {
   transform: scale(0.98);
 }
 
 /* Botón Principal Rojo La Serena */
-.btn-stitch-primary {
+.btn-muni, .btn-stitch-primary {
   background: var(--muni-red);
   color: #ffffff;
   border-color: var(--muni-red-dark);
   box-shadow: 0 2px 4px rgba(184, 0, 3, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
-.btn-stitch-primary:hover {
+.btn-muni, .btn-stitch-primary:hover {
   background: var(--muni-red-dark);
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(184, 0, 3, 0.35);
 }
 
 /* Botón Secundario Stitch */
-.btn-stitch-secondary {
+.btn-muni, .btn-stitch-secondary {
   background: #ffffff;
   color: var(--text-main);
   border-color: var(--border-stitch);
   box-shadow: var(--shadow-sm);
 }
 
-.btn-stitch-secondary:hover {
+.btn-muni, .btn-stitch-secondary:hover {
   background: var(--surface-muted);
   border-color: #CBD5E1;
   color: var(--text-main);
 }
 
 /* Botón Excel Stitch (Oficial) */
-.btn-stitch-excel {
+.btn-muni, .btn-stitch-excel {
   background: linear-gradient(180deg, #10B981 0%, #059669 100%);
   color: #ffffff;
   border-color: #047857;
   box-shadow: 0 2px 4px rgba(5, 150, 105, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-stitch-excel:hover {
+.btn-muni, .btn-stitch-excel:hover {
   background: linear-gradient(180deg, #34D399 0%, #10B981 100%);
   color: #ffffff;
   box-shadow: 0 4px 10px rgba(5, 150, 105, 0.35);
 }
 
 /* Botones Iconos de Acción */
-.btn-stitch-icon {
+.btn-muni, .btn-stitch-icon {
   width: 34px;
   height: 34px;
   border-radius: var(--radius-xs);
@@ -382,13 +382,13 @@ body {
   text-decoration: none;
 }
 
-.btn-stitch-icon:hover {
+.btn-muni, .btn-stitch-icon:hover {
   background: var(--surface-muted);
   color: var(--text-main);
   border-color: #CBD5E1;
 }
 
-.btn-stitch-icon-delete:hover {
+.btn-muni, .btn-stitch-icon-delete:hover {
   background: var(--muni-red-tint);
   color: var(--muni-red);
   border-color: var(--muni-red-border);
@@ -397,14 +397,14 @@ body {
 /* ==============================================================================
    TABLAS STITCH & BADGES
    ============================================================================== */
-.table-stitch {
+.table-muni, .table-stitch {
   width: 100%;
   margin-bottom: 0;
   border-collapse: separate;
   border-spacing: 0;
 }
 
-.table-stitch thead th {
+.table-muni, .table-stitch thead th {
   background: #F8FAFC;
   color: var(--text-muted);
   font-size: 0.76rem;
@@ -416,7 +416,7 @@ body {
   white-space: nowrap;
 }
 
-.table-stitch tbody td {
+.table-muni, .table-stitch tbody td {
   padding: 1rem 1.25rem;
   vertical-align: middle;
   color: var(--text-main);
@@ -425,16 +425,16 @@ body {
   transition: background 0.15s ease;
 }
 
-.table-stitch tbody tr:hover td {
+.table-muni, .table-stitch tbody tr:hover td {
   background-color: rgba(184, 0, 3, 0.018);
 }
 
-.table-stitch tbody tr:last-child td {
+.table-muni, .table-stitch tbody tr:last-child td {
   border-bottom: none;
 }
 
 /* Badges Stitch de Estado */
-.badge-stitch-activo {
+.badge-muni, .badge-stitch-activo {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -447,7 +447,7 @@ body {
   border: 1px solid var(--muni-green-border);
 }
 
-.badge-stitch-activo::before {
+.badge-muni, .badge-stitch-activo::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -455,7 +455,7 @@ body {
   background-color: var(--muni-green);
 }
 
-.badge-stitch-inactivo {
+.badge-muni, .badge-stitch-inactivo {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -468,7 +468,7 @@ body {
   border: 1px solid var(--muni-red-border);
 }
 
-.badge-stitch-inactivo::before {
+.badge-muni, .badge-stitch-inactivo::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -476,7 +476,7 @@ body {
   background-color: var(--muni-red);
 }
 
-.badge-stitch-tag {
+.badge-muni, .badge-stitch-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
